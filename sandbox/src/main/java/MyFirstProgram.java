@@ -4,7 +4,7 @@ public class MyFirstProgram {
         Point p2 = new Point(7,1);
 
         System.out.println("Distance from function = " + distance(p1, p2));
-        System.out.println("Distance from method = " + Point.distance(p1, p2));
+        System.out.println("Distance from method = " + p1.distance(p2));
     }
 
     public static double distance(Point p1, Point p2) {
