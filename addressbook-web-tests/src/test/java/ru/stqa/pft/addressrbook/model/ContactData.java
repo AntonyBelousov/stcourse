@@ -4,15 +4,15 @@ public class ContactData {
     private final String firstName;
     private final String lastName;
     private final String nickName;
-    private final String amazon;
+    private final String company;
     private final String phoneHome;
     private final String email;
 
-    public ContactData(String firstName, String lastName, String nickName, String amazon, String phoneHome, String email) {
+    public ContactData(String firstName, String lastName, String nickName, String company, String phoneHome, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.nickName = nickName;
-        this.amazon = amazon;
+        this.company = company;
         this.phoneHome = phoneHome;
         this.email = email;
     }
@@ -29,8 +29,8 @@ public class ContactData {
         return nickName;
     }
 
-    public String getAmazon() {
-        return amazon;
+    public String getCompany() {
+        return company;
     }
 
     public String getPhoneHome() {
