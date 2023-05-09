@@ -14,6 +14,6 @@ public class NavigationHelper extends BaseHelper {
     }
 
     public void gotoToHomePage() {
-        click(By.linkText("home page"));
+        click(By.partialLinkText("home"));
     }
 }

@@ -4,6 +4,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
+
 public class BaseHelper {
     protected ChromeDriver wd;
 
@@ -28,5 +32,15 @@ public class BaseHelper {
         } catch (NoAlertPresentException e) {
             return false;
         }
+    }
+
+    public void acceptAlert() {
+        if(isAlertPresent()) {
+            wd.switchTo().alert().accept();
+        }
+    }
+
+    public void checkAlertText(String alertText) {
+        assertEquals(alertText, wd.switchTo().alert().getText());
     }
 }

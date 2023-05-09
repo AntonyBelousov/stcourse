@@ -1,8 +1,11 @@
 package ru.stqa.pft.addressrbook.appmanager;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import ru.stqa.pft.addressrbook.model.ContactData;
+
+import java.util.List;
 
 public class ContactHelper extends BaseHelper {
 
@@ -26,4 +29,30 @@ public class ContactHelper extends BaseHelper {
     public void submitContactCreation() {
         click(By.xpath("//input[@name='submit'][2]"));
     }
+
+    public void addNextContact() {
+        click(By.linkText("add next"));
+    }
+
+    public void selectContactInTable() {
+        click(By.xpath("//input[@type='checkbox']"));
+    }
+
+    public void deleteContact() {
+        click(By.xpath("//input[@value='Delete']"));
+    }
+
+    public void selectAllContactsInTable() {
+        click(By.id("MassCB"));
+    }
+
+    public void addContactsInTable(List<ContactData> contactDataList) {
+        initContactCreation();
+        contactDataList.forEach(contactData -> {
+            fillContactForm(contactData);
+            submitContactCreation();
+            addNextContact();
+        });
+    }
 }
+
