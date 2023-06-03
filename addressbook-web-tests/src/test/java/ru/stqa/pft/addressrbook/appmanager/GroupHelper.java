@@ -4,6 +4,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.chrome.ChromeDriver;
 import ru.stqa.pft.addressrbook.model.GroupData;
 
+import static java.lang.String.format;
+
 public class GroupHelper extends BaseHelper {
 
     public GroupHelper(ChromeDriver wd) {
@@ -32,7 +34,11 @@ public class GroupHelper extends BaseHelper {
         click(By.name("delete"));
     }
 
-    public void selectGroup() {
-        click(By.name("selected[]"));
+    public void selectGroup(String groupName) {
+        click(By.name(format("//span[contains(text(),'%s')]//input[@name='selected[]']", groupName)));
+    }
+
+    public void editSelectedGroup() {
+        click(By.name("edit"));
     }
 }

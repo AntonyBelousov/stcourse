@@ -16,5 +16,12 @@ public class ContactCreationTests extends TestBase {
         app.getNavigationHelper().gotoToHomePage();
     }
 
+    @Test
+    public void testEmptyContactCreation() {
+        app.getContactHelper().initContactCreation();
+        app.getContactHelper().submitContactCreation();
+        app.getNavigationHelper().gotoToHomePage();
+    }
+
 }
 

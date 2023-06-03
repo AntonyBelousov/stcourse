@@ -1,12 +1,17 @@
 package ru.stqa.pft.addressrbook.model;
 
 public class ContactData {
+    private String id;
     private String firstName;
     private String lastName;
     private String nickName;
     private String company;
     private String phoneHome;
     private String email;
+
+    public String getId() {
+        return id;
+    }
 
     public String getFirstName() {
         return firstName;
@@ -54,5 +59,9 @@ public class ContactData {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

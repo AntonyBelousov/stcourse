@@ -1,11 +1,12 @@
 package ru.stqa.pft.addressrbook.appmanager;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import ru.stqa.pft.addressrbook.model.ContactData;
 
 import java.util.List;
+
+import static java.lang.String.format;
 
 public class ContactHelper extends BaseHelper {
 
@@ -53,6 +54,18 @@ public class ContactHelper extends BaseHelper {
             submitContactCreation();
             addNextContact();
         });
+    }
+
+    public void setContactId(ContactData contactData) {
+        contactData.setId(wd.findElement(By.xpath(format("//input[@accept='%s']", contactData.getEmail()))).getAttribute("id"));
+    }
+
+    public void goToContactEditPage(String contactId) {
+        click(By.xpath(format("//a[@href='edit.php?id=%s']", contactId)));
+    }
+
+    public void submitContactUpdate() {
+        click(By.name("update"));
     }
 }
 
