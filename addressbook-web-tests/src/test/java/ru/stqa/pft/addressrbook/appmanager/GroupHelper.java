@@ -35,7 +35,7 @@ public class GroupHelper extends BaseHelper {
     }
 
     public void selectGroup(String groupName) {
-        click(By.name(format("//span[contains(text(),'%s')]//input[@name='selected[]']", groupName)));
+        click(By.xpath(format("//span[contains(text(),'%s')]//input[@name='selected[]']", groupName)));
     }
 
     public void editSelectedGroup() {

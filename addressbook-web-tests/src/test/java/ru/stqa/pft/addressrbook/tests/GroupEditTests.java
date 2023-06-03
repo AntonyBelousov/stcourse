@@ -27,6 +27,7 @@ public class GroupEditTests extends TestBase{
         app.getGroupHelper().selectGroup(groupData.getName());
         app.getGroupHelper().editSelectedGroup();
         app.getGroupHelper().fillGroupForm(editedGroupData);
+        app.getContactHelper().submitContactUpdate();
         app.getGroupHelper().returnToGroupPage();
         app.logout();
     }
