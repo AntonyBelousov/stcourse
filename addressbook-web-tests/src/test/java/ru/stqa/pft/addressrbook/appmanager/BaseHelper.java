@@ -2,16 +2,14 @@ package ru.stqa.pft.addressrbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.WebDriver;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
 
 public class BaseHelper {
-    protected ChromeDriver wd;
+    protected WebDriver wd;
 
-    public BaseHelper(ChromeDriver wd) {
+    public BaseHelper(WebDriver wd) {
         this.wd = wd;
     }
 

@@ -1,6 +1,7 @@
 package ru.stqa.pft.addressrbook.appmanager;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import ru.stqa.pft.addressrbook.model.ContactData;
 
@@ -10,7 +11,7 @@ import static java.lang.String.format;
 
 public class ContactHelper extends BaseHelper {
 
-    public ContactHelper(ChromeDriver wd) {
+    public ContactHelper(WebDriver wd) {
         super(wd);
     }
 

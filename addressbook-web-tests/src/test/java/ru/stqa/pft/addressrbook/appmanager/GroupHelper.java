@@ -1,6 +1,7 @@
 package ru.stqa.pft.addressrbook.appmanager;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import ru.stqa.pft.addressrbook.model.GroupData;
 
@@ -8,7 +9,7 @@ import static java.lang.String.format;
 
 public class GroupHelper extends BaseHelper {
 
-    public GroupHelper(ChromeDriver wd) {
+    public GroupHelper(WebDriver wd) {
         super(wd);
     }
 
