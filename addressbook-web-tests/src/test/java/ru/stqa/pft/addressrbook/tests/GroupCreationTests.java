@@ -1,9 +1,12 @@
 package ru.stqa.pft.addressrbook.tests;
 
 import org.testng.Assert;
-import org.testng.annotations.*;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 import ru.stqa.pft.addressrbook.appmanager.TestDataProvider;
 import ru.stqa.pft.addressrbook.model.GroupData;
+
+import java.util.List;
 
 public class GroupCreationTests extends TestBase {
 
@@ -17,9 +20,9 @@ public class GroupCreationTests extends TestBase {
   @Test
   public void testGroupCreation() {
     app.getNavigationHelper().gotoGroupPage();
-    int before = app.getGroupHelper().getGroupCount();
+    List<GroupData> groupListBefore = app.getGroupHelper().getGroupList();
     app.getGroupHelper().createGroup(groupData);
-    int after = app.getGroupHelper().getGroupCount();
-    Assert.assertEquals(after, before + 1);
+    List<GroupData> groupListAfter = app.getGroupHelper().getGroupList();
+    Assert.assertEquals(groupListAfter.size(), groupListBefore.size() + 1);
   }
 }
