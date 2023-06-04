@@ -25,7 +25,7 @@ public class GroupEditTests extends TestBase{
         }
 
         int before = app.getGroupHelper().getGroupCount();
-        app.getGroupHelper().selectGroup();
+        app.getGroupHelper().selectGroup(before-1);
         app.getGroupHelper().editSelectedGroup();
         app.getGroupHelper().fillGroupForm(editedGroupData);
         app.getContactHelper().submitContactUpdate();
