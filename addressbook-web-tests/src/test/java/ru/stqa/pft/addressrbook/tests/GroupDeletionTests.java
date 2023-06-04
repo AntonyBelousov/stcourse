@@ -1,5 +1,6 @@
 package ru.stqa.pft.addressrbook.tests;
 
+import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressrbook.appmanager.TestDataProvider;
@@ -21,10 +22,12 @@ public class GroupDeletionTests extends TestBase {
             app.getGroupHelper().createGroup(groupData);
         }
 
+        int before = app.getGroupHelper().getGroupCount();
         app.getGroupHelper().selectGroup();
         app.getGroupHelper().deleteSelectedGroups();
         app.getGroupHelper().returnToGroupPage();
-        app.logout();
+        int after = app.getGroupHelper().getGroupCount();
+        Assert.assertEquals(after, before - 1);
     }
 
 }
