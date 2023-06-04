@@ -5,7 +5,6 @@ import ru.stqa.pft.addressrbook.model.ContactData;
 import ru.stqa.pft.addressrbook.model.GroupData;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 public class TestDataProvider {

@@ -2,7 +2,6 @@ package ru.stqa.pft.addressrbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import ru.stqa.pft.addressrbook.model.GroupData;
 
 import static java.lang.String.format;
@@ -35,11 +34,27 @@ public class GroupHelper extends BaseHelper {
         click(By.name("delete"));
     }
 
-    public void selectGroup(String groupName) {
+    public void selectGroup() {
+        click(By.name("selected[]"));
+    }
+
+    public void selectGroupByName(String groupName) {
         click(By.xpath(format("//span[contains(text(),'%s')]//input[@name='selected[]']", groupName)));
     }
 
     public void editSelectedGroup() {
         click(By.name("edit"));
     }
+
+    public void createGroup(GroupData groupData) {
+        initGroupCreation();
+        fillGroupForm(groupData);
+        submitGroupCreation();
+        returnToGroupPage();
+    }
+
+    public boolean isThereAGroup() {
+        return isElementPresent(By.name("selected[]"));
+    }
+
 }

@@ -19,12 +19,11 @@ public class GroupEditTests extends TestBase{
     @Test
     public void testGroupEdit() {
         app.getNavigationHelper().gotoGroupPage();
-        app.getGroupHelper().initGroupCreation();
-        app.getGroupHelper().fillGroupForm(groupData);
-        app.getGroupHelper().submitGroupCreation();
-        app.getGroupHelper().returnToGroupPage();
+        if (!app.getGroupHelper().isThereAGroup()) {
+            app.getGroupHelper().createGroup(groupData);
+        }
 
-        app.getGroupHelper().selectGroup(groupData.getName());
+        app.getGroupHelper().selectGroup();
         app.getGroupHelper().editSelectedGroup();
         app.getGroupHelper().fillGroupForm(editedGroupData);
         app.getContactHelper().submitContactUpdate();
