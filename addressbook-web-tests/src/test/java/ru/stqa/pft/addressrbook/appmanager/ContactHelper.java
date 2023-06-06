@@ -2,8 +2,10 @@ package ru.stqa.pft.addressrbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import ru.stqa.pft.addressrbook.model.ContactData;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static java.lang.String.format;
@@ -80,6 +82,20 @@ public class ContactHelper extends BaseHelper {
 
     public boolean isThereAContact() {
         return isElementPresent(By.name("selected[]"));
+    }
+
+    public List<ContactData> getContactList() {
+        List<ContactData> contacts = new ArrayList<>();
+        List<WebElement> elements = wd.findElements(By.name("entry"));
+        for (WebElement element: elements) {
+            String firstName = element.findElements(By.tagName("td")).get(2).getText();
+            String lastName = element.findElements(By.tagName("td")).get(1).getText();
+            ContactData contact = new ContactData();
+            contact.setFirstName(firstName);
+            contact.setLastName(lastName);
+            contacts.add(contact);
+        }
+        return contacts;
     }
 }
 
