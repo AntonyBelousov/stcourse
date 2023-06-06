@@ -30,6 +30,9 @@ public class GroupDeletionTests extends TestBase {
         app.getGroupHelper().returnToGroupPage();
         List<GroupData> groupListAfter = app.getGroupHelper().getGroupList();
         Assert.assertEquals(groupListAfter.size(), groupListBefore.size() - 1);
+
+        groupListBefore.remove(groupListBefore.size()-1);
+        Assert.assertEquals(groupListBefore, groupListAfter);
     }
 
 }
