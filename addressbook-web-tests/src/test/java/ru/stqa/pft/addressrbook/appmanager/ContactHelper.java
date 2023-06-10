@@ -13,6 +13,7 @@ public class ContactHelper extends BaseHelper {
     public ContactHelper(WebDriver wd) {
         super(wd);
     }
+    private Contacts contactCache = null;
 
     public void returnToContactPage() {
         click(By.partialLinkText("home"));
@@ -52,21 +53,25 @@ public class ContactHelper extends BaseHelper {
     }
 
     public Contacts all() {
-        Contacts contacts = new Contacts();
+        if (contactCache != null) {
+            return new Contacts(contactCache);
+        }
+        contactCache = new Contacts();
         List<WebElement> elements = wd.findElements(By.name("entry"));
         for (WebElement element: elements) {
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
             String firstName = element.findElements(By.tagName("td")).get(2).getText();
             String lastName = element.findElements(By.tagName("td")).get(1).getText();
-            contacts.add(new ContactData().withId(id).withFirstName(firstName).withLastName(lastName));
+            contactCache.add(new ContactData().withId(id).withFirstName(firstName).withLastName(lastName));
         }
-        return contacts;
+        return new Contacts(contactCache);
     }
 
     public void create(ContactData contactData) {
         initContactCreation();
         fillContactForm(contactData);
         submitContactCreation();
+        contactCache = null;
         returnToContactPage();
     }
 
@@ -74,6 +79,7 @@ public class ContactHelper extends BaseHelper {
         selectContactById(contact.getId());
         deleteContact();
         acceptAlert();
+        contactCache = null;
         returnToContactPage();
     }
 
@@ -85,6 +91,7 @@ public class ContactHelper extends BaseHelper {
         goToContactEditPage(contact.getId());
         fillContactForm(contact);
         submitContactUpdate();
+        contactCache = null;
         returnToContactPage();
     }
 }

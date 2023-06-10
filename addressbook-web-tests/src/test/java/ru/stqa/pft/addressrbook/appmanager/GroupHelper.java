@@ -13,6 +13,7 @@ public class GroupHelper extends BaseHelper {
     public GroupHelper(WebDriver wd) {
         super(wd);
     }
+    private Groups groupCache = null;
 
     public void returnToGroupPage() {
         click(By.linkText("group page"));
@@ -44,6 +45,7 @@ public class GroupHelper extends BaseHelper {
         initGroupCreation();
         fillGroupForm(groupData);
         submitGroupCreation();
+        groupCache = null;
         returnToGroupPage();
     }
 
@@ -56,14 +58,17 @@ public class GroupHelper extends BaseHelper {
     }
 
     public Groups all() {
-        Groups groups = new Groups();
+        if (groupCache != null) {
+            return new Groups(groupCache);
+        }
+        groupCache = new Groups();
         List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));
         for (WebElement element: elements) {
             String name = element.getText();
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-            groups.add(new GroupData().withName(name).withId(id));
+            groupCache.add(new GroupData().withName(name).withId(id));
         }
-        return groups;
+        return new Groups(groupCache);
     }
 
     public void submitGroupModification() {
@@ -73,6 +78,7 @@ public class GroupHelper extends BaseHelper {
     public void delete(GroupData group) {
         selectGroupById(group.getId());
         deleteSelectedGroups();
+        groupCache = null;
         returnToGroupPage();
     }
 
@@ -85,6 +91,7 @@ public class GroupHelper extends BaseHelper {
         initGroupModification();
         fillGroupForm(editedGroup);
         submitGroupModification();
+        groupCache = null;
         returnToGroupPage();
     }
 }
