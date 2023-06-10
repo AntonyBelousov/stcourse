@@ -17,9 +17,14 @@ public class TestDataProvider {
                 .withFirstName(generateRandomString(randomValueLength))
                 .withLastName(generateRandomString(randomValueLength))
                 .withCompany(generateRandomString(randomValueLength))
+                .withAddress(generateRandomString(randomValueLength))
                 .withNickName(generateRandomString(randomValueLength))
                 .withEmail(generateRandomString(randomValueLength) + "@mail.com")
-                .withPhoneHome("+7" + generateRandomTelephoneNumber(phoneNumberLength));
+                .withEmail2(generateRandomString(randomValueLength) + "@mail.com")
+                .withEmail3(generateRandomString(randomValueLength) + "@mail.com")
+                .withHomePhone("+7" + generateRandomTelephoneNumber(phoneNumberLength))
+                .withMobilePhone("+7" + generateRandomTelephoneNumber(phoneNumberLength))
+                .withWorkPhone("+7" + generateRandomTelephoneNumber(phoneNumberLength));
     }
 
     public static GroupData getNewGroupData() {

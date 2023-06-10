@@ -24,7 +24,9 @@ public class ContactHelper extends BaseHelper {
         type(By.name("lastname"), contactData.getLastName());
         type(By.name("nickname"), contactData.getNickName());
         type(By.name("company"), contactData.getCompany());
-        type(By.name("home"), contactData.getPhoneHome());
+        type(By.name("home"), contactData.getHomePhone());
+        type(By.name("mobile"), contactData.getMobilePhone());
+        type(By.name("work"), contactData.getWorkPhone());
         type(By.name("email"), contactData.getEmail());
     }
 
@@ -41,7 +43,7 @@ public class ContactHelper extends BaseHelper {
     }
 
     public void goToContactEditPage(int id) {
-        click(By.cssSelector("a[href='edit.php?id=" + id + "']"));
+        wd.findElement(By.cssSelector(String.format("a[href='edit.php?id=%s']", id))).click();
     }
 
     public void submitContactUpdate() {
@@ -61,12 +63,23 @@ public class ContactHelper extends BaseHelper {
             return new Contacts(contactCache);
         }
         contactCache = new Contacts();
-        List<WebElement> elements = wd.findElements(By.name("entry"));
-        for (WebElement element: elements) {
-            int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-            String firstName = element.findElements(By.tagName("td")).get(2).getText();
-            String lastName = element.findElements(By.tagName("td")).get(1).getText();
-            contactCache.add(new ContactData().withId(id).withFirstName(firstName).withLastName(lastName));
+        List<WebElement> rows = wd.findElements(By.name("entry"));
+        for (WebElement row: rows) {
+            List<WebElement> cells = row.findElements(By.tagName("td"));
+            int id = Integer.parseInt(row.findElement(By.tagName("input")).getAttribute("value"));
+            String firstName = cells.get(2).getText();
+            String lastName = cells.get(1).getText();
+            String address = cells.get(3).getText();
+            String allEmail = cells.get(4).getText();
+            String allPhones = cells.get(5).getText();
+            contactCache.add(new ContactData()
+                    .withId(id)
+                    .withFirstName(firstName)
+                    .withLastName(lastName)
+                    .withAddress(address)
+                    .withAllEmail(allEmail)
+                    .withAllPhones(allPhones)
+            );
         }
         return new Contacts(contactCache);
     }
@@ -88,7 +101,7 @@ public class ContactHelper extends BaseHelper {
     }
 
     public void selectContactById(int id) {
-        wd.findElement(By.cssSelector("input[value='" + id + "']")).click();
+        wd.findElement(By.cssSelector(String.format("input[value='%s']", id))).click();
     }
 
     public void modify(ContactData contact) {
@@ -97,6 +110,33 @@ public class ContactHelper extends BaseHelper {
         submitContactUpdate();
         contactCache = null;
         returnToContactPage();
+    }
+
+    public ContactData infoFromEditForm(ContactData contact) {
+        goToContactEditPage(contact.getId());
+        String firstName = wd.findElement(By.name("firstname")).getAttribute("value");
+        String lastName = wd.findElement(By.name("lastname")).getAttribute("value");
+        String nickName = wd.findElement(By.name("nickname")).getAttribute("value");
+        String company = wd.findElement(By.name("company")).getAttribute("value");
+        String address = wd.findElement(By.name("address")).getAttribute("value");
+        String homePhone = wd.findElement(By.name("home")).getAttribute("value");
+        String mobilePhone = wd.findElement(By.name("mobile")).getAttribute("value");
+        String workPhone = wd.findElement(By.name("work")).getAttribute("value");
+        String email = wd.findElement(By.name("email")).getAttribute("value");
+        String email2 = wd.findElement(By.name("email2")).getAttribute("value");
+        String email3 = wd.findElement(By.name("email3")).getAttribute("value");
+        return new ContactData()
+                .withFirstName(firstName)
+                .withLastName(lastName)
+                .withNickName(nickName)
+                .withCompany(company)
+                .withAddress(address)
+                .withHomePhone(homePhone)
+                .withMobilePhone(mobilePhone)
+                .withWorkPhone(workPhone)
+                .withEmail(email)
+                .withEmail2(email2)
+                .withEmail3(email3);
     }
 }
 
