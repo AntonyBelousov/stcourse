@@ -16,14 +16,14 @@ public class GroupCreationTests extends TestBase {
   @BeforeMethod
   public void prepare() {
     group = TestDataProvider.getNewGroupData();
-    app.getNavigationHelper().gotoGroupPage();
+    app.goTo().groupPage();
   }
 
   @Test
   public void testGroupCreation() {
-    List<GroupData> groupListBefore = app.getGroupHelper().getGroupList();
-    app.getGroupHelper().createGroup(group);
-    List<GroupData> groupListAfter = app.getGroupHelper().getGroupList();
+    List<GroupData> groupListBefore = app.group().list();
+    app.group().create(group);
+    List<GroupData> groupListAfter = app.group().list();
     Assert.assertEquals(groupListAfter.size(), groupListBefore.size() + 1);
 
     group.setId(groupListAfter.stream().max((o1, o2) -> Integer.compare(o1.getId(), o2.getId())).get().getId());

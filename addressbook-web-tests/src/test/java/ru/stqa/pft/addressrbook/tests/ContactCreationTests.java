@@ -18,7 +18,7 @@ public class ContactCreationTests extends TestBase {
         app.getContactHelper().initContactCreation();
         app.getContactHelper().fillContactForm(contactData);
         app.getContactHelper().submitContactCreation();
-        app.getNavigationHelper().gotoToHomePage();
+        app.goTo().homePage();
         contactsBefore.add(contactData);
         List<ContactData> contactsAfter = app.getContactHelper().getContactList();
 
@@ -29,7 +29,7 @@ public class ContactCreationTests extends TestBase {
     public void testEmptyContactCreation() {
         app.getContactHelper().initContactCreation();
         app.getContactHelper().submitContactCreation();
-        app.getNavigationHelper().gotoToHomePage();
+        app.goTo().homePage();
     }
 
 }

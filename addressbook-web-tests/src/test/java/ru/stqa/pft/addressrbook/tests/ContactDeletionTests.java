@@ -16,12 +16,12 @@ public class ContactDeletionTests extends TestBase {
         if (!app.getContactHelper().isThereAContact()) {
             app.getContactHelper().createContact(contactData);
         }
-        app.getNavigationHelper().gotoToHomePage();
+        app.goTo().homePage();
         List<ContactData> contactsBefore = app.getContactHelper().getContactList();
         app.getContactHelper().selectContactInTable();
         app.getContactHelper().deleteContact();
         app.getContactHelper().acceptAlert();
-        app.getNavigationHelper().gotoToHomePage();
+        app.goTo().homePage();
 
         contactsBefore.remove(0);
         List<ContactData> contactsAfter = app.getContactHelper().getContactList();
@@ -33,10 +33,10 @@ public class ContactDeletionTests extends TestBase {
         if (!app.getContactHelper().isThereAContact()) {
             app.getContactHelper().addContactsInTable(TestDataProvider.getNewContactDataList(4));
         }
-        app.getNavigationHelper().gotoToHomePage();
+        app.goTo().homePage();
         app.getContactHelper().selectAllContactsInTable();
         app.getContactHelper().deleteContact();
         app.getContactHelper().acceptAlert();
-        app.getNavigationHelper().gotoToHomePage();
+        app.goTo().homePage();
     }
 }

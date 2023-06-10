@@ -16,13 +16,13 @@ public class ContactEditTests extends TestBase {
         if (!app.getContactHelper().isThereAContact()) {
             app.getContactHelper().createContact(TestDataProvider.getNewContactData());
         }
-        app.getNavigationHelper().gotoToHomePage();
+        app.goTo().homePage();
         List<ContactData> contactsBefore = app.getContactHelper().getContactList();
         editedContact.setId(contactsBefore.get(0).getId());
         app.getContactHelper().goToContactEditPage();
         app.getContactHelper().fillContactForm(editedContact);
         app.getContactHelper().submitContactUpdate();
-        app.getNavigationHelper().gotoToHomePage();
+        app.goTo().homePage();
 
         List<ContactData> contactsAfter = app.getContactHelper().getContactList();
         contactsBefore.remove(0);

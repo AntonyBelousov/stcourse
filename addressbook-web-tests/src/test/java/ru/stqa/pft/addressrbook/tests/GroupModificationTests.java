@@ -9,7 +9,7 @@ import ru.stqa.pft.addressrbook.model.GroupData;
 import java.util.HashSet;
 import java.util.List;
 
-public class GroupEditTests extends TestBase{
+public class GroupModificationTests extends TestBase{
 
     private GroupData group;
     private GroupData editedGroup;
@@ -18,19 +18,19 @@ public class GroupEditTests extends TestBase{
     public void prepare() {
         group = TestDataProvider.getNewGroupData();
         editedGroup = TestDataProvider.getNewGroupData();
-        app.getNavigationHelper().gotoGroupPage();
-        if (!app.getGroupHelper().isThereAGroup()) {
-            app.getGroupHelper().createGroup(group);
+        app.goTo().groupPage();
+        if (app.group().list().size() == 0) {
+            app.group().create(group);
         }
     }
 
     @Test
     public void testGroupEdit() {
-        List<GroupData> groupListBefore = app.getGroupHelper().getGroupList();
+        List<GroupData> groupListBefore = app.group().list();
         int index = groupListBefore.size()-1;
         editedGroup.setId(groupListBefore.get(index).getId());
-        app.getGroupHelper().modifyGroup(index, editedGroup);
-        List<GroupData> groupListAfter = app.getGroupHelper().getGroupList();
+        app.group().modify(index, editedGroup);
+        List<GroupData> groupListAfter = app.group().list();
 
         Assert.assertEquals(groupListAfter.size(), groupListBefore.size());
         groupListBefore.remove(index);
