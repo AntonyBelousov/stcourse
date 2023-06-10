@@ -13,14 +13,13 @@ public class TestDataProvider {
     private static final int phoneNumberLength = 10;
 
     public static ContactData getNewContactData() {
-        ContactData contact = new ContactData();
-        contact.setFirstName(generateRandomString(randomValueLength));
-        contact.setLastName(generateRandomString(randomValueLength));
-        contact.setCompany(generateRandomString(randomValueLength));
-        contact.setNickName(generateRandomString(randomValueLength));
-        contact.setEmail(generateRandomString(randomValueLength) + "@mail.com");
-        contact.setPhoneHome("+7" + generateRandomTelephoneNumber(phoneNumberLength));
-        return contact;
+        return new ContactData()
+                .withFirstName(generateRandomString(randomValueLength))
+                .withLastName(generateRandomString(randomValueLength))
+                .withCompany(generateRandomString(randomValueLength))
+                .withNickName(generateRandomString(randomValueLength))
+                .withEmail(generateRandomString(randomValueLength) + "@mail.com")
+                .withPhoneHome("+7" + generateRandomTelephoneNumber(phoneNumberLength));
     }
 
     public static GroupData getNewGroupData() {

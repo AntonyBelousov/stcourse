@@ -1,36 +1,26 @@
 package ru.stqa.pft.addressrbook.tests;
 
-import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressrbook.appmanager.TestDataProvider;
 import ru.stqa.pft.addressrbook.model.ContactData;
+import ru.stqa.pft.addressrbook.model.Contacts;
 
-import java.util.HashSet;
-import java.util.List;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ContactCreationTests extends TestBase {
 
     @Test
     public void testContactCreation() {
-        ContactData contactData = TestDataProvider.getNewContactData();
+        ContactData contact = TestDataProvider.getNewContactData();
         app.goTo().homePage();
-        List<ContactData> contactsBefore = app.getContactHelper().getContactList();
-        app.getContactHelper().initContactCreation();
-        app.getContactHelper().fillContactForm(contactData);
-        app.getContactHelper().submitContactCreation();
-        app.goTo().homePage();
-        contactsBefore.add(contactData);
-        List<ContactData> contactsAfter = app.getContactHelper().getContactList();
+        Contacts contactsBefore = app.contact().all();
+        app.contact().create(contact);
+        contactsBefore.add(contact);
+        Contacts contactsAfter = app.contact().all();
 
-        Assert.assertEquals(new HashSet<>(contactsAfter), new HashSet<>(contactsBefore));
+        assertThat(contactsAfter, equalTo(
+                contactsBefore.withAdded(contact.withId(contactsAfter.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
     }
-
-    @Test
-    public void testEmptyContactCreation() {
-        app.getContactHelper().initContactCreation();
-        app.getContactHelper().submitContactCreation();
-        app.goTo().homePage();
-    }
-
 }
 

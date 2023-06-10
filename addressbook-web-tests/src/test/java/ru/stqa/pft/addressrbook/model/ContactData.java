@@ -3,7 +3,7 @@ package ru.stqa.pft.addressrbook.model;
 import java.util.Objects;
 
 public class ContactData {
-    private String id;
+    private int id;
     private String firstName;
     private String lastName;
     private String nickName;
@@ -11,7 +11,7 @@ public class ContactData {
     private String phoneHome;
     private String email;
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
@@ -39,45 +39,39 @@ public class ContactData {
         return email;
     }
 
-    public void setFirstName(String firstName) {
+    public ContactData withFirstName(String firstName) {
         this.firstName = firstName;
+        return this;
     }
 
-    public void setLastName(String lastName) {
+    public ContactData withLastName(String lastName) {
         this.lastName = lastName;
+        return this;
     }
 
-    public void setNickName(String nickName) {
+    public ContactData withNickName(String nickName) {
         this.nickName = nickName;
+        return this;
     }
 
-    public void setCompany(String company) {
+    public ContactData withCompany(String company) {
         this.company = company;
+        return this;
     }
 
-    public void setPhoneHome(String phoneHome) {
+    public ContactData withPhoneHome(String phoneHome) {
         this.phoneHome = phoneHome;
+        return this;
     }
 
-    public void setEmail(String email) {
+    public ContactData withEmail(String email) {
         this.email = email;
+        return this;
     }
 
-    public void setId(String id) {
+    public ContactData withId(int id) {
         this.id = id;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ContactData that = (ContactData) o;
-        return Objects.equals(firstName, that.firstName) && Objects.equals(lastName, that.lastName);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(firstName, lastName);
+        return this;
     }
 
     @Override
@@ -86,5 +80,18 @@ public class ContactData {
                 "firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ContactData that = (ContactData) o;
+        return id == that.id && Objects.equals(firstName, that.firstName) && Objects.equals(lastName, that.lastName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, firstName, lastName);
     }
 }

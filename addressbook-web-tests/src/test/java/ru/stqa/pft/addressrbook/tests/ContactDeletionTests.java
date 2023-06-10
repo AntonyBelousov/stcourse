@@ -1,44 +1,34 @@
 package ru.stqa.pft.addressrbook.tests;
 
-import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressrbook.appmanager.TestDataProvider;
 import ru.stqa.pft.addressrbook.model.ContactData;
+import ru.stqa.pft.addressrbook.model.Contacts;
 
-import java.util.HashSet;
-import java.util.List;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ContactDeletionTests extends TestBase {
+
+    private ContactData contact;
+
+    @BeforeMethod
+    public void prepare() {
+        contact = TestDataProvider.getNewContactData();
+        app.goTo().homePage();
+        if (!app.contact().isThereAContact()) {
+            app.contact().create(contact);
+        }
+    }
     
     @Test
     public void testContactDeletion() {
-        ContactData contactData = TestDataProvider.getNewContactData();
-        app.goTo().homePage();
-        if (!app.getContactHelper().isThereAContact()) {
-            app.getContactHelper().createContact(contactData);
-        }
-        app.goTo().homePage();
-        List<ContactData> contactsBefore = app.getContactHelper().getContactList();
-        app.getContactHelper().selectContactInTable();
-        app.getContactHelper().deleteContact();
-        app.getContactHelper().acceptAlert();
-        app.goTo().homePage();
+        Contacts contactsBefore = app.contact().all();
+        ContactData deletedContact = contactsBefore.iterator().next();
+        app.contact().delete(deletedContact);
+        Contacts contactsAfter = app.contact().all();
 
-        contactsBefore.remove(0);
-        List<ContactData> contactsAfter = app.getContactHelper().getContactList();
-        Assert.assertEquals(new HashSet<>(contactsAfter), new HashSet<>(contactsBefore));
-    }
-
-    @Test
-    public void testAllContactsDeletion() {
-        app.goTo().homePage();
-        if (!app.getContactHelper().isThereAContact()) {
-            app.getContactHelper().addContactsInTable(TestDataProvider.getNewContactDataList(4));
-        }
-        app.goTo().homePage();
-        app.getContactHelper().selectAllContactsInTable();
-        app.getContactHelper().deleteContact();
-        app.getContactHelper().acceptAlert();
-        app.goTo().homePage();
+        assertThat(contactsAfter, equalTo(contactsBefore.without(deletedContact)));
     }
 }
