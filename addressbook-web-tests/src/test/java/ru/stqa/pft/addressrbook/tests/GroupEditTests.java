@@ -18,26 +18,22 @@ public class GroupEditTests extends TestBase{
     public void prepare() {
         group = TestDataProvider.getNewGroupData();
         editedGroup = TestDataProvider.getNewGroupData();
-    }
-
-    @Test
-    public void testGroupEdit() {
         app.getNavigationHelper().gotoGroupPage();
         if (!app.getGroupHelper().isThereAGroup()) {
             app.getGroupHelper().createGroup(group);
         }
+    }
 
+    @Test
+    public void testGroupEdit() {
         List<GroupData> groupListBefore = app.getGroupHelper().getGroupList();
-        app.getGroupHelper().selectGroup(groupListBefore.size()-1);
-        editedGroup.setId(groupListBefore.get(groupListBefore.size()-1).getId());
-        app.getGroupHelper().editSelectedGroup();
-        app.getGroupHelper().fillGroupForm(editedGroup);
-        app.getContactHelper().submitContactUpdate();
-        app.getGroupHelper().returnToGroupPage();
+        int index = groupListBefore.size()-1;
+        editedGroup.setId(groupListBefore.get(index).getId());
+        app.getGroupHelper().modifyGroup(index, editedGroup);
         List<GroupData> groupListAfter = app.getGroupHelper().getGroupList();
 
         Assert.assertEquals(groupListAfter.size(), groupListBefore.size());
-        groupListBefore.remove(groupListBefore.size()-1);
+        groupListBefore.remove(index);
         groupListBefore.add(editedGroup);
         Assert.assertEquals(new HashSet<Object>(groupListBefore), new HashSet<Object>(groupListAfter));
     }

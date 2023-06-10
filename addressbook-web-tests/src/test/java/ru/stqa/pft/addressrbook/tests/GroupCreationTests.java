@@ -16,11 +16,11 @@ public class GroupCreationTests extends TestBase {
   @BeforeMethod
   public void prepare() {
     group = TestDataProvider.getNewGroupData();
+    app.getNavigationHelper().gotoGroupPage();
   }
 
   @Test
   public void testGroupCreation() {
-    app.getNavigationHelper().gotoGroupPage();
     List<GroupData> groupListBefore = app.getGroupHelper().getGroupList();
     app.getGroupHelper().createGroup(group);
     List<GroupData> groupListAfter = app.getGroupHelper().getGroupList();

@@ -46,7 +46,7 @@ public class GroupHelper extends BaseHelper {
         click(By.xpath(format("//span[contains(text(),'%s')]//input[@name='selected[]']", groupName)));
     }
 
-    public void editSelectedGroup() {
+    public void initGroupModification() {
         click(By.name("edit"));
     }
 
@@ -54,6 +54,14 @@ public class GroupHelper extends BaseHelper {
         initGroupCreation();
         fillGroupForm(groupData);
         submitGroupCreation();
+        returnToGroupPage();
+    }
+
+    public void modifyGroup(int index, GroupData editedGroup) {
+        selectGroup(index);
+        initGroupModification();
+        fillGroupForm(editedGroup);
+        submitGroupModification();
         returnToGroupPage();
     }
 
@@ -77,5 +85,9 @@ public class GroupHelper extends BaseHelper {
             groups.add(group);
         }
         return groups;
+    }
+
+    public void submitGroupModification() {
+        click(By.name("update"));
     }
 }
