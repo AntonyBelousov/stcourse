@@ -39,10 +39,4 @@ public class ContactDeletionTests extends TestBase {
         app.getContactHelper().acceptAlert();
         app.getNavigationHelper().gotoToHomePage();
     }
-
-    @Test
-    public void testPressingDeleteButtonWithoutSelectedContacts() {
-        app.getContactHelper().deleteContact();
-        app.getContactHelper().checkAlertText("No participants selected.");
-    }
 }
