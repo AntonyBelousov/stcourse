@@ -13,6 +13,7 @@ public class ContactEditTests extends TestBase {
     @Test
     public void testEditContactFromHomePage() {
         ContactData editedContact = TestDataProvider.getNewContactData();
+        app.goTo().homePage();
         if (!app.getContactHelper().isThereAContact()) {
             app.getContactHelper().createContact(TestDataProvider.getNewContactData());
         }

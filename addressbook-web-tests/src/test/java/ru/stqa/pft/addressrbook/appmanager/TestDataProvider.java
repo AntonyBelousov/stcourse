@@ -9,9 +9,10 @@ import java.util.List;
 
 public class TestDataProvider {
 
+    private static final int randomValueLength = 8;
+    private static final int phoneNumberLength = 10;
+
     public static ContactData getNewContactData() {
-        int randomValueLength = 8;
-        int phoneNumberLength = 10;
         ContactData contact = new ContactData();
         contact.setFirstName(generateRandomString(randomValueLength));
         contact.setLastName(generateRandomString(randomValueLength));
@@ -23,12 +24,10 @@ public class TestDataProvider {
     }
 
     public static GroupData getNewGroupData() {
-        int randomValueLength = 8;
-        GroupData groupData = new GroupData();
-        groupData.setName(generateRandomString(randomValueLength));
-        groupData.setHeader(generateRandomString(randomValueLength));
-        groupData.setFooter(generateRandomString(randomValueLength));
-        return groupData;
+        return new GroupData()
+                .withName(generateRandomString(randomValueLength))
+                .withHeader(generateRandomString(randomValueLength))
+                .withFooter(generateRandomString(randomValueLength));
     }
 
     public static String generateRandomString(int length) {

@@ -13,6 +13,7 @@ public class ContactDeletionTests extends TestBase {
     @Test
     public void testContactDeletion() {
         ContactData contactData = TestDataProvider.getNewContactData();
+        app.goTo().homePage();
         if (!app.getContactHelper().isThereAContact()) {
             app.getContactHelper().createContact(contactData);
         }
@@ -30,6 +31,7 @@ public class ContactDeletionTests extends TestBase {
 
     @Test
     public void testAllContactsDeletion() {
+        app.goTo().homePage();
         if (!app.getContactHelper().isThereAContact()) {
             app.getContactHelper().addContactsInTable(TestDataProvider.getNewContactDataList(4));
         }
