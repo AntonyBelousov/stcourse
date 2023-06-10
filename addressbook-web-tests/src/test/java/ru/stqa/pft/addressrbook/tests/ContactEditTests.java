@@ -23,11 +23,12 @@ public class ContactEditTests extends TestBase {
     }
 
     @Test
-    public void testEditContactFromHomePage() {
+    public void testEditContact() {
         Contacts contactsBefore = app.contact().all();
         ContactData modifiedContact = contactsBefore.iterator().next();
         contact.withId(modifiedContact.getId());
         app.contact().modify(contact);
+        assertThat(app.contact().count(), equalTo(contactsBefore.size()));
         Contacts contactsAfter = app.contact().all();
 
         assertThat(contactsAfter, equalTo(contactsBefore.without(modifiedContact).withAdded(contact)));
