@@ -19,13 +19,17 @@ public class ContactData {
     private String address;
     @Expose
     private String homePhone;
+    @Expose
     private String mobilePhone;
+    @Expose
     private String workPhone;
     private String allPhones;
     private String allEmail;
     @Expose
     private String email;
+    @Expose
     private String email2;
+    @Expose
     private String email3;
     private File photo;
 
