@@ -13,6 +13,26 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.6.1'
 }
 
-test {
-    useTestNG()
+task testGroups(type: Test) {
+    useTestNG {
+        suites 'src/test/resources/testngGroups.xml'
+    }
+    if (project.hasProperty('browser')) {
+        systemProperty 'browser', "${project.property('browser')}"
+    }
+    if (project.hasProperty('target')) {
+        systemProperty 'target', "${project.property('target')}"
+    }
+}
+
+task testContacts(type: Test) {
+    useTestNG {
+        suites 'src/test/resources/testngContacts.xml'
+    }
+    if (project.hasProperty('browser')) {
+        systemProperty 'browser', "${project.property('browser')}"
+    }
+    if (project.hasProperty('target')) {
+        systemProperty 'target', "${project.property('target')}"
+    }
 }
