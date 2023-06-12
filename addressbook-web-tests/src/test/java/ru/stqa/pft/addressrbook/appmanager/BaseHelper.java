@@ -27,7 +27,9 @@ public class BaseHelper {
     }
 
     protected void attach(By locator, File file) {
-        wd.findElement(locator).sendKeys(file.getAbsolutePath());
+        if (file != null) {
+            wd.findElement(locator).sendKeys(file.getAbsolutePath());
+        }
     }
 
     public boolean isAlertPresent() {

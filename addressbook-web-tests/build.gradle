@@ -12,3 +12,7 @@ dependencies {
     implementation 'com.beust:jcommander:1.48'
     implementation 'com.google.code.gson:gson:2.6.1'
 }
+
+test {
+    useTestNG()
+}
