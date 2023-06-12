@@ -22,26 +22,12 @@ public class ContactDataTests extends TestBase{
     }
 
     @Test
-    public void testContactPhones() {
+    public void testContactData() {
         ContactData contact = app.contact().all().iterator().next();
         ContactData contactDataFromEditForm = app.contact().infoFromEditForm(contact);
 
         assertThat(contact.getAllPhones(), equalTo(mergePhones(contactDataFromEditForm)));
-    }
-
-    @Test
-    public void testContactEmail() {
-        ContactData contact = app.contact().all().iterator().next();
-        ContactData contactDataFromEditForm = app.contact().infoFromEditForm(contact);
-
         assertThat(contact.getAllEmail(), equalTo(mergeEmail(contactDataFromEditForm)));
-    }
-
-    @Test
-    public void testContactAddress() {
-        ContactData contact = app.contact().all().iterator().next();
-        ContactData contactDataFromEditForm = app.contact().infoFromEditForm(contact);
-
         assertThat(contact.getAddress(), equalTo(contactDataFromEditForm.getAddress()));
     }
 
