@@ -16,7 +16,7 @@ public class ContactDataTests extends TestBase{
     @BeforeMethod
     public void prepare() {
         app.goTo().homePage();
-        if (app.contact().all().size() == 0) {
+        if (app.db().contacts().size() == 0) {
             app.contact().create(TestDataProvider.getNewContactData());
         }
     }

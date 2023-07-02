@@ -4,6 +4,7 @@ import org.apache.commons.lang3.RandomStringUtils;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.GroupData;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +25,8 @@ public class TestDataProvider {
                 .withEmail3(generateRandomString(randomValueLength) + "@mail.com")
                 .withHomePhone("+7" + generateRandomTelephoneNumber(phoneNumberLength))
                 .withMobilePhone("+7" + generateRandomTelephoneNumber(phoneNumberLength))
-                .withWorkPhone("+7" + generateRandomTelephoneNumber(phoneNumberLength));
+                .withWorkPhone("+7" + generateRandomTelephoneNumber(phoneNumberLength))
+                .withPhoto(new File("src/test/resources/cat.png"));
     }
 
     public static GroupData getNewGroupData() {

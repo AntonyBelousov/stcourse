@@ -15,21 +15,21 @@ public class GroupModificationTests extends TestBase{
 
     @BeforeMethod
     public void prepare() {
-        group = TestDataProvider.getNewGroupData();
         app.goTo().groupPage();
-        if (app.group().all().size() == 0) {
+        group = TestDataProvider.getNewGroupData();
+        if (app.db().groups().size() == 0) {
             app.group().create(TestDataProvider.getNewGroupData());
         }
     }
 
     @Test
     public void testGroupEdit() {
-        Groups groupsBefore = app.group().all();
+        Groups groupsBefore = app.db().groups();
         GroupData modifiedGroup = groupsBefore.iterator().next();
         group.withId(modifiedGroup.getId());
         app.group().modify(group);
         assertThat(app.group().count(), equalTo(groupsBefore.size()));
-        Groups groupsAfter = app.group().all();
+        Groups groupsAfter = app.db().groups();
 
         assertThat(groupsAfter, equalTo(groupsBefore.without(modifiedGroup).withAdded(group)));
     }

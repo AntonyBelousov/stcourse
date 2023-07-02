@@ -17,19 +17,19 @@ public class ContactEditTests extends TestBase {
     public void prepare() {
         contact = TestDataProvider.getNewContactData();
         app.goTo().homePage();
-        if (app.contact().all().size() == 0) {
+        if (app.db().contacts().size() == 0) {
             app.contact().create(contact);
         }
     }
 
     @Test
     public void testEditContact() {
-        Contacts contactsBefore = app.contact().all();
+        Contacts contactsBefore = app.db().contacts();
         ContactData modifiedContact = contactsBefore.iterator().next();
         contact.withId(modifiedContact.getId());
         app.contact().modify(contact);
         assertThat(app.contact().count(), equalTo(contactsBefore.size()));
-        Contacts contactsAfter = app.contact().all();
+        Contacts contactsAfter = app.db().contacts();
 
         assertThat(contactsAfter, equalTo(contactsBefore.without(modifiedContact).withAdded(contact)));
     }

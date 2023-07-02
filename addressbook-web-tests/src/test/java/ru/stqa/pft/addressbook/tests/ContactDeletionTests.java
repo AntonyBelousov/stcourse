@@ -17,18 +17,18 @@ public class ContactDeletionTests extends TestBase {
     public void prepare() {
         contact = TestDataProvider.getNewContactData();
         app.goTo().homePage();
-        if (app.contact().all().size() == 0) {
+        if (app.db().contacts().size() == 0) {
             app.contact().create(contact);
         }
     }
     
     @Test
     public void testContactDeletion() {
-        Contacts contactsBefore = app.contact().all();
+        Contacts contactsBefore = app.db().contacts();
         ContactData deletedContact = contactsBefore.iterator().next();
         app.contact().delete(deletedContact);
         assertThat(app.contact().count(), equalTo(contactsBefore.size()-1));
-        Contacts contactsAfter = app.contact().all();
+        Contacts contactsAfter = app.db().contacts();
 
         assertThat(contactsAfter, equalTo(contactsBefore.without(deletedContact)));
     }

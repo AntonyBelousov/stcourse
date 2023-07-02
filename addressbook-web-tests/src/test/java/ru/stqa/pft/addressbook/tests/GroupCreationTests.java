@@ -37,10 +37,10 @@ public class GroupCreationTests extends TestBase {
   @Test(dataProvider = "validGroupsFromJson")
   public void testGroupCreation(GroupData group) {
     app.goTo().groupPage();
-    Groups groupsBefore = app.group().all();
+    Groups groupsBefore = app.db().groups();
     app.group().create(group);
     assertThat(app.group().count(), equalTo(groupsBefore.size() + 1));
-    Groups groupsAfter = app.group().all();
+    Groups groupsAfter = app.db().groups();
 
     assertThat(groupsAfter, equalTo(
             groupsBefore.withAdded(group.withId(groupsAfter.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
