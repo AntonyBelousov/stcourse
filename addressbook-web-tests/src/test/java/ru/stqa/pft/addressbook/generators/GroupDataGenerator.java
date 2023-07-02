@@ -1,11 +1,11 @@
-package ru.stqa.pft.addressrbook.generators;
+package ru.stqa.pft.addressbook.generators;
 
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
 import com.beust.jcommander.ParameterException;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import ru.stqa.pft.addressrbook.model.GroupData;
+import ru.stqa.pft.addressbook.model.GroupData;
 
 import java.io.File;
 import java.io.FileWriter;

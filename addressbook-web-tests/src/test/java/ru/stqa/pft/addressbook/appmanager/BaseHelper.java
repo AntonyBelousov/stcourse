@@ -1,4 +1,4 @@
-package ru.stqa.pft.addressrbook.appmanager;
+package ru.stqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;

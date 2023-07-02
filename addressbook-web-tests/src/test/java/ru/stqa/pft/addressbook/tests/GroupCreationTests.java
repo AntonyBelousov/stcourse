@@ -1,11 +1,11 @@
-package ru.stqa.pft.addressrbook.tests;
+package ru.stqa.pft.addressbook.tests;
 
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import ru.stqa.pft.addressrbook.model.GroupData;
-import ru.stqa.pft.addressrbook.model.Groups;
+import ru.stqa.pft.addressbook.model.GroupData;
+import ru.stqa.pft.addressbook.model.Groups;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

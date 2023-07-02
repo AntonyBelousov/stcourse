@@ -1,8 +1,8 @@
-package ru.stqa.pft.addressrbook.appmanager;
+package ru.stqa.pft.addressbook.appmanager;
 
 import org.apache.commons.lang3.RandomStringUtils;
-import ru.stqa.pft.addressrbook.model.ContactData;
-import ru.stqa.pft.addressrbook.model.GroupData;
+import ru.stqa.pft.addressbook.model.ContactData;
+import ru.stqa.pft.addressbook.model.GroupData;
 
 import java.util.ArrayList;
 import java.util.List;
