@@ -140,5 +140,27 @@ public class ContactHelper extends BaseHelper {
                 .withEmail2(email2)
                 .withEmail3(email3);
     }
+
+    public void addContactToGroup(int contactId, int groupId) {
+        selectContactById(contactId);
+        selectGroupById(groupId);
+        click(By.name("add"));
+    }
+
+    private void selectGroupById(int groupId) {
+        click(By.cssSelector("select[name='to_group']"));
+        wd.findElement(By.name("to_group")).findElement(By.cssSelector(String.format("option[value='%s']", groupId))).click();
+    }
+
+    public void sortContactsByGroup(int groupId) {
+        click(By.cssSelector("select[name='group']"));
+        wd.findElement(By.name("group")).findElement(By.cssSelector(String.format("option[value='%s']", groupId))).click();
+    }
+
+    public void deleteContactFromGroup(int contactId, int groupId) {
+        sortContactsByGroup(groupId);
+        selectContactById(contactId);
+        click(By.name("remove"));
+    }
 }
 

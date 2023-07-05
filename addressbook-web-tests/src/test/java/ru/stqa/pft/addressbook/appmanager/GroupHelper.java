@@ -30,6 +30,7 @@ public class GroupHelper extends BaseHelper {
     }
 
     public void initGroupCreation() {
+        click(By.linkText("groups"));
         click(By.name("new"));
     }
 
