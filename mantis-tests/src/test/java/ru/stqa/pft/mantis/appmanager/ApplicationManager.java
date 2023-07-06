@@ -20,6 +20,9 @@ public class ApplicationManager {
 
     private String browser;
     private FtpHelper ftpHelper;
+    private UIHelper uiHelper;
+    private NavigationHelper navigation;
+    private DbHelper db;
 
     public ApplicationManager(String browser) {
         this.browser = browser;
@@ -54,6 +57,7 @@ public class ApplicationManager {
             } else if(browser.equals(Browser.EDGE.browserName())) {
                 wd = new EdgeDriver();
             }
+            wd.manage().window().maximize();
             wd.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
             wd.get(properties.getProperty("baseUrl"));
         }
@@ -79,5 +83,26 @@ public class ApplicationManager {
             mailHelper = new MailHelper(this);
         }
         return mailHelper;
+    }
+
+    public UIHelper uiHelper(){
+        if (uiHelper == null) {
+            uiHelper = new UIHelper(this);
+        }
+        return uiHelper;
+    }
+
+    public NavigationHelper navigation(){
+        if (navigation == null) {
+            navigation = new NavigationHelper(this);
+        }
+        return navigation;
+    }
+
+    public DbHelper db(){
+        if (db == null) {
+            db = new DbHelper(this);
+        }
+        return db;
     }
 }
