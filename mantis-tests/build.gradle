@@ -8,6 +8,11 @@ dependencies {
     implementation 'org.testng:testng:7.3.0'
     implementation 'org.seleniumhq.selenium:selenium-java:4.8.3'
     testImplementation 'org.hamcrest:java-hamcrest:2.0.0.0'
+    implementation 'org.apache.httpcomponents:httpclient:4.5.13'
+    implementation 'commons-net:commons-net:3.9.0'
+    testImplementation 'org.subethamail:subethasmtp:3.1.7'
+    implementation 'ru.lanwen.verbalregex:java-verbal-expressions:1.8'
+    testImplementation 'ch.qos.logback:logback-classic:1.1.5'
 }
 
 test {
