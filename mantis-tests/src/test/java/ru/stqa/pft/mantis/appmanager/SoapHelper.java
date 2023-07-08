@@ -5,7 +5,7 @@ import biz.futureware.mantis.rpc.soap.client.MantisConnectLocator;
 import biz.futureware.mantis.rpc.soap.client.MantisConnectPortType;
 import biz.futureware.mantis.rpc.soap.client.ObjectRef;
 import biz.futureware.mantis.rpc.soap.client.ProjectData;
-import ru.stqa.pft.mantis.model.Issue;
+import ru.stqa.pft.mantis.model.IssueMantis;
 import ru.stqa.pft.mantis.model.Project;
 
 import javax.xml.rpc.ServiceException;
@@ -40,17 +40,17 @@ public class SoapHelper extends BaseHelper {
                 .collect(Collectors.toSet());
     }
 
-    public Issue addIssue(Issue issue) throws MalformedURLException, ServiceException, RemoteException {
+    public IssueMantis addIssue(IssueMantis issueMantis) throws MalformedURLException, ServiceException, RemoteException {
         MantisConnectPortType mc = getMantisConnect();
-        String[] categories = mc.mc_project_get_categories(login, password, BigInteger.valueOf(issue.getProject().getId()));
+        String[] categories = mc.mc_project_get_categories(login, password, BigInteger.valueOf(issueMantis.getProject().getId()));
         IssueData issueData = new IssueData();
-        issueData.setSummary(issue.getSummary());
-        issueData.setDescription(issue.getDescription());
-        issueData.setProject(new ObjectRef(BigInteger.valueOf(issue.getProject().getId()), issue.getProject().getName()));
+        issueData.setSummary(issueMantis.getSummary());
+        issueData.setDescription(issueMantis.getDescription());
+        issueData.setProject(new ObjectRef(BigInteger.valueOf(issueMantis.getProject().getId()), issueMantis.getProject().getName()));
         issueData.setCategory(categories[0]);
         BigInteger issueId = mc.mc_issue_add(login, password, issueData);
         IssueData createdIssueData = mc.mc_issue_get(login, password, issueId);
-        return new Issue()
+        return new IssueMantis()
                 .withId(createdIssueData.getId().intValue())
                 .withSummary(createdIssueData.getSummary())
                 .withDescription(createdIssueData.getDescription())
