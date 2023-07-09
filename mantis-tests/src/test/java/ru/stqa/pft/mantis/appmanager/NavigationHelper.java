@@ -10,11 +10,11 @@ public class NavigationHelper extends BaseHelper {
     }
 
     public void goToManagePage() {
-        click(By.cssSelector("[href='/mantisbt/manage_overview_page.php']"));
+        click(By.cssSelector("[href*='/manage_overview_page.php']"));
     }
 
     public void goToManageUsersPage() {
-        click(By.cssSelector("[href='/mantisbt/manage_user_page.php']"));
+        click(By.cssSelector("[href*='/manage_user_page.php']"));
     }
 
     public void goToManageUserEditPage(UserData user) {
